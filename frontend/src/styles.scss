@@ -1,0 +1,152 @@
+/* Global styles - WatchHub Smartwatch Leaderboard */
+@import '@angular/material/prebuilt-themes/azure-blue.css';
+
+:root {
+  --ink-900: #0f1024;
+  --ink-800: #161a35;
+  --ink-700: #1f254a;
+  --ink-50: #f5f7ff;
+  --paper: #ffffff;
+  --line: #e4e6f2;
+  --accent: #ff6a3d;
+  --accent-2: #6c5ce7;
+  --cyan: #00c2ff;
+  --gold: #f6c945;
+  --silver: #c9cfdb;
+  --bronze: #cd7f32;
+  --good: #00b884;
+  --bad: #ff476f;
+  --shadow-sm: 0 1px 2px rgba(15, 16, 36, 0.06);
+  --shadow-md: 0 8px 24px rgba(15, 16, 36, 0.08);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  background: var(--ink-50);
+  color: var(--ink-900);
+  -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+
+a { color: var(--accent-2); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.01em; margin: 0; }
+.mono { font-family: 'JetBrains Mono', monospace; }
+
+.page {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+}
+
+.page-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.page-title { font-size: clamp(28px, 3vw, 40px); font-weight: 700; }
+.page-subtitle { color: #5a607f; font-size: 14px; margin-top: 4px; }
+
+.surface {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  padding: 24px;
+}
+
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.gap-1 { gap: 4px; } .gap-2 { gap: 8px; } .gap-3 { gap: 12px; }
+.gap-4 { gap: 16px; } .gap-6 { gap: 24px; } .gap-8 { gap: 32px; }
+.items-center { align-items: center; }
+.justify-between { justify-content: space-between; }
+.justify-end { justify-content: flex-end; }
+.wrap { flex-wrap: wrap; }
+.full-w { width: 100%; }
+
+.muted { color: #5a607f; }
+.danger { color: var(--bad); }
+.good { color: var(--good); }
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #eef0ff;
+  color: var(--ink-700);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+}
+.badge.success { background: #e2faf1; color: #0a7c5b; }
+.badge.warn { background: #fff3d4; color: #8a6700; }
+.badge.error { background: #ffe1e8; color: #a8113c; }
+.badge.muted { background: #eef0f7; color: #4f566b; }
+.badge.tag { background: #fff0ea; color: #c93d10; }
+
+.grid { display: grid; gap: 24px; }
+.grid-cols-1 { grid-template-columns: 1fr; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+@media (max-width: 1024px) {
+  .grid-cols-3, .grid-cols-4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 720px) {
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 { grid-template-columns: 1fr; }
+}
+
+.empty {
+  padding: 48px 16px;
+  text-align: center;
+  color: #5a607f;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius-md);
+}
+
+.spinner-wrap { display: flex; justify-content: center; padding: 48px 0; }
+
+table.simple {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+table.simple th, table.simple td {
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--line);
+}
+table.simple th { color: #4f566b; font-weight: 600; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+table.simple tr:hover td { background: #f8f9ff; }
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.mat-mdc-form-field { width: 100%; }
+
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+
+.chip-set { display: flex; flex-wrap: wrap; gap: 6px; }
+
+.medal-1 { color: var(--gold); }
+.medal-2 { color: var(--silver); }
+.medal-3 { color: var(--bronze); }

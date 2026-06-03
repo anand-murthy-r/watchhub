@@ -1,0 +1,390 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "admin@watchhub.io",
+      "password": "Admin@123",
+      "fullName": "Asha Iyer",
+      "phone": "+91-9876543210",
+      "city": "Bengaluru",
+      "region": "APAC",
+      "role": "ROLE_ADMIN",
+      "deviceId": 1
+    },
+    {
+      "id": 2,
+      "email": "alex.smith@example.com",
+      "password": "User@123",
+      "fullName": "Alex Smith",
+      "phone": "+1-555-203-9981",
+      "city": "Seattle",
+      "region": "NA",
+      "role": "ROLE_USER",
+      "deviceId": 2
+    },
+    {
+      "id": 3,
+      "email": "priya.menon@example.com",
+      "password": "User@123",
+      "fullName": "Priya Menon",
+      "phone": "+91-9090909090",
+      "city": "Chennai",
+      "region": "APAC",
+      "role": "ROLE_USER",
+      "deviceId": 3
+    },
+    {
+      "id": 4,
+      "email": "marc.lee@example.com",
+      "password": "User@123",
+      "fullName": "Marc Lee",
+      "phone": "+44-7700-900123",
+      "city": "London",
+      "region": "EU",
+      "role": "ROLE_USER",
+      "deviceId": 1
+    },
+    {
+      "id": 5,
+      "email": "sara.kim@example.com",
+      "password": "User@123",
+      "fullName": "Sara Kim",
+      "phone": "+82-10-2233-4455",
+      "city": "Seoul",
+      "region": "APAC",
+      "role": "ROLE_USER",
+      "deviceId": 2
+    },
+    {
+      "email": "test_65f5360d@example.com",
+      "password": "Pass@123",
+      "fullName": "Test User",
+      "phone": "+10000000000",
+      "city": "TestCity",
+      "region": "APAC",
+      "role": "ROLE_USER",
+      "deviceId": null,
+      "id": 6
+    },
+    {
+      "email": "play_3b6fa6@example.com",
+      "password": "Pass@123",
+      "fullName": "Playwright User",
+      "phone": "+15555550101",
+      "city": "Bengaluru",
+      "region": "APAC",
+      "role": "ROLE_USER",
+      "deviceId": null,
+      "id": 7
+    }
+  ],
+  "devices": [
+    {
+      "id": 1,
+      "name": "Pulse Watch 12",
+      "manufacturer": "FitCo",
+      "featureTags": [
+        "HRM",
+        "STEPS",
+        "CALORIES",
+        "SLEEP"
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Active Watch 970",
+      "manufacturer": "Pebble",
+      "featureTags": [
+        "STEPS",
+        "RESPIRATORY_RATE",
+        "TEMPERATURE",
+        "HRM"
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Trail Pro X",
+      "manufacturer": "Northbound",
+      "featureTags": [
+        "STEPS",
+        "GPS",
+        "ALTITUDE",
+        "HRM",
+        "CALORIES"
+      ]
+    },
+    {
+      "id": 4,
+      "name": "Lite Band 3",
+      "manufacturer": "Glimmer",
+      "featureTags": [
+        "STEPS",
+        "SLEEP"
+      ]
+    }
+  ],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Morning Mover",
+      "description": "Complete 5,000 steps every morning for 3 days.",
+      "targetSteps": 5000,
+      "duration": 3,
+      "active": true,
+      "requiredTags": [
+        "STEPS"
+      ],
+      "outcome": {
+        "reward": "Early Bird"
+      },
+      "region": "APAC"
+    },
+    {
+      "id": 2,
+      "name": "Cardio Climb",
+      "description": "Sustain elevated heart rate for 30 minutes across 5 days.",
+      "targetSteps": 0,
+      "duration": 5,
+      "active": true,
+      "requiredTags": [
+        "HRM",
+        "CALORIES"
+      ],
+      "outcome": {
+        "reward": "Cardio Crown"
+      },
+      "region": "GLOBAL"
+    },
+    {
+      "id": 3,
+      "name": "Weekend Warrior",
+      "description": "Hit 12,000 steps both Saturday and Sunday.",
+      "targetSteps": 12000,
+      "duration": 2,
+      "active": true,
+      "requiredTags": [
+        "STEPS"
+      ],
+      "outcome": {
+        "reward": "Weekend Warrior"
+      },
+      "region": "NA"
+    },
+    {
+      "id": 4,
+      "name": "Restful Nights",
+      "description": "Sleep at least 7 hours for 7 consecutive nights.",
+      "targetSteps": 0,
+      "duration": 7,
+      "active": false,
+      "requiredTags": [
+        "SLEEP"
+      ],
+      "outcome": {
+        "reward": "Dream Walker"
+      },
+      "region": "EU"
+    },
+    {
+      "name": "TEST_Task_6625ba",
+      "description": "Pytest created task",
+      "targetSteps": 1000,
+      "duration": 7,
+      "active": true,
+      "requiredTags": [
+        "steps"
+      ],
+      "outcome": {
+        "points": 100
+      },
+      "region": "APAC",
+      "id": 5
+    },
+    {
+      "name": "PlaywrightTask_1780449218",
+      "description": "Created via Playwright test",
+      "targetSteps": 0,
+      "duration": 5,
+      "active": true,
+      "requiredTags": [],
+      "outcome": {
+        "reward": "50"
+      },
+      "region": "APAC",
+      "id": 6
+    }
+  ],
+  "challenges": [
+    {
+      "id": 1,
+      "name": "Endurance Open",
+      "description": "Two-week endurance push across global teams.",
+      "scope": "PUBLIC",
+      "status": "ACTIVE",
+      "ownerUserId": 1,
+      "taskId": 1,
+      "region": "GLOBAL",
+      "startAt": "2026-02-01T00:00:00Z",
+      "endAt": "2026-03-15T23:59:59Z",
+      "requiredTags": [
+        "STEPS"
+      ],
+      "participants": [
+        2,
+        3,
+        4,
+        5,
+        7
+      ]
+    },
+    {
+      "id": 2,
+      "name": "Cardio Crown",
+      "description": "Heart-rate sustained sessions for the bold.",
+      "scope": "FRIENDLY",
+      "status": "ACTIVE",
+      "ownerUserId": 1,
+      "taskId": 2,
+      "region": "APAC",
+      "startAt": "2026-02-10T00:00:00Z",
+      "endAt": "2026-04-01T23:59:59Z",
+      "requiredTags": [
+        "HRM",
+        "CALORIES"
+      ],
+      "participants": [
+        2,
+        3
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Spring Sprint",
+      "description": "Sprint to 100k steps in 14 days.",
+      "scope": "PUBLIC",
+      "status": "CLOSED",
+      "ownerUserId": 1,
+      "taskId": 3,
+      "region": "NA",
+      "startAt": "2026-01-01T00:00:00Z",
+      "endAt": "2026-01-15T23:59:59Z",
+      "requiredTags": [
+        "STEPS"
+      ],
+      "participants": [
+        4,
+        5
+      ]
+    }
+  ],
+  "userProgress": [
+    {
+      "userId": 2,
+      "totalPoints": 3288,
+      "activities": [
+        {
+          "id": 1,
+          "activityDate": "2026-02-10",
+          "stepCountValue": 7722,
+          "heartRate": 78,
+          "calories": 412
+        },
+        {
+          "id": 2,
+          "activityDate": "2026-02-11",
+          "stepCountValue": 8100,
+          "heartRate": 80,
+          "calories": 430
+        },
+        {
+          "id": 3,
+          "activityDate": "2026-02-12",
+          "stepCountValue": 6450,
+          "heartRate": 76,
+          "calories": 388
+        },
+        {
+          "activityDate": "2026-01-15",
+          "stepCountValue": 5000,
+          "heartRate": 80,
+          "calories": 200,
+          "id": 4
+        }
+      ],
+      "rewards": [
+        "Early Bird",
+        "Weekend Warrior"
+      ]
+    },
+    {
+      "userId": 3,
+      "totalPoints": 3120,
+      "activities": [
+        {
+          "id": 1,
+          "activityDate": "2026-02-10",
+          "stepCountValue": 9200,
+          "heartRate": 82,
+          "calories": 470
+        },
+        {
+          "id": 2,
+          "activityDate": "2026-02-11",
+          "stepCountValue": 10120,
+          "heartRate": 85,
+          "calories": 510
+        }
+      ],
+      "rewards": [
+        "Cardio Crown",
+        "Early Bird"
+      ]
+    },
+    {
+      "userId": 4,
+      "totalPoints": 1980,
+      "activities": [
+        {
+          "id": 1,
+          "activityDate": "2026-02-09",
+          "stepCountValue": 5600,
+          "heartRate": 74,
+          "calories": 330
+        }
+      ],
+      "rewards": [
+        "Weekend Warrior"
+      ]
+    },
+    {
+      "userId": 5,
+      "totalPoints": 2450,
+      "activities": [
+        {
+          "id": 1,
+          "activityDate": "2026-02-10",
+          "stepCountValue": 8800,
+          "heartRate": 79,
+          "calories": 425
+        }
+      ],
+      "rewards": [
+        "Early Bird"
+      ]
+    },
+    {
+      "userId": 7,
+      "totalPoints": 250,
+      "activities": [
+        {
+          "activityDate": "2026-06-03",
+          "stepCountValue": 2500,
+          "heartRate": null,
+          "calories": null,
+          "id": 1
+        }
+      ],
+      "rewards": []
+    }
+  ]
+}

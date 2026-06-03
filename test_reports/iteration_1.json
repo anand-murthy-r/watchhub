@@ -1,0 +1,54 @@
+{
+  "summary": "End-to-end testing of WatchHub Smartwatch Leaderboard (Angular 20 + FastAPI mock). Backend pytest suite (17 tests) all pass. Frontend Playwright run validated health page, login (valid+invalid), register, route guard, telemetry validation+submit, challenge join, leaderboard with podium/medals/masking, admin task creation, trigger-ranking, and logout. Auth interceptor confirmed attaching both X-Session-Id and Authorization headers on protected calls. One minor UX bug in the error interceptor and one minor missing data-testid noted.",
+  "backend_issues": {
+    "critical": [],
+    "minor": []
+  },
+  "frontend_issues": {
+    "ui_bugs": [
+      {
+        "component": "ErrorInterceptor (login page)",
+        "issue": "Invalid login credentials show snackbar 'Session expired - please log in again' instead of an 'Invalid credentials' / INVALID_CREDENTIALS-specific message. The 401 returned by POST /api/auth/login is treated like a session-expiry 401 and triggers the generic session-expired toast (the snack appears twice on a single failed attempt).",
+        "selector": "mat-snack-bar-container after submitting [data-testid=\"login-submit\"]",
+        "priority": "MEDIUM"
+      },
+      {
+        "component": "ChallengeDetailComponent",
+        "issue": "data-testid=\"podium-card\" is not rendered on /challenges/:id participant podium (count=0 returned). It IS rendered on the /leaderboard page. If podium is intended on challenge-detail, add the data-testid; otherwise update the test plan note.",
+        "selector": "[data-testid=\"podium-card\"]",
+        "priority": "LOW"
+      }
+    ],
+    "integration_issues": [],
+    "design_issues": []
+  },
+  "test_report_links": [
+    "/app/backend/tests/backend_test.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [
+    "Update error.interceptor.ts: when status===401 AND request URL ends with /api/auth/login (or response detail.code === 'INVALID_CREDENTIALS'), show a credential-specific message ('Invalid email or password') instead of the generic 'Session expired - please log in again'. Also ensure the snackbar is only opened once per failure (currently shows twice).",
+    "(Optional) Add data-testid=\"podium-card\" to the top-3 participant cards on /challenges/:id if a podium is supposed to be shown there, OR clarify in the test spec that podium-card only exists on /leaderboard."
+  ],
+  "critical_code_review_comments": [
+    "Backend /api/user/{user_id} POST telemetry: pydantic gt=0 returns 422 (Unprocessable Entity), but the requirement says 'inline validation' — frontend correctly enforces a client-side mat-error 'Steps must be greater than 0' before the API call. Good.",
+    "Backend register endpoint persists to db.json on every write — fine for mock, but concurrent writes only guarded by a thread lock; under multi-worker uvicorn deployment this would race. Acceptable for current single-worker dev mode.",
+    "Auth interceptor sets BOTH X-Session-Id and Authorization: Bearer. Server accepts either; not a bug but slightly redundant.",
+    "ErrorInterceptor double-snackbar on a single failed login (observed two identical toasts). Likely missing return/throwError dedupe or subscribing twice.",
+    "db.json is updated by tests (new users, tasks, etc.) and not cleaned up — over many iterations the seed grows. Consider an /api/_reset endpoint or test fixtures that delete TEST_ prefixed rows."
+  ],
+  "updated_files": [
+    "/app/backend/tests/backend_test.py",
+    "/app/backend/tests/__init__.py"
+  ],
+  "success_rate": {
+    "backend": "100% (17/17 pytest)",
+    "frontend": "≈95% (all 13 listed scenarios pass; 1 UX wording bug, 1 missing optional data-testid)"
+  },
+  "test_credentials": "Admin admin@watchhub.io/Admin@123; User alex.smith@example.com/User@123 (from /app/memory/test_credentials.md)",
+  "seed_data_creation": "Tests created several TEST_ tasks, devices, and play_<hex>@example.com registered users via /api/auth/register. They are persisted to /app/backend/db.json. No cleanup endpoint exists; recommend not running suite repeatedly without reset.",
+  "retest_needed": false,
+  "should_main_agent_self_test": true,
+  "context_for_next_testing_agent": "Backend pytest at /app/backend/tests/backend_test.py - run with: REACT_APP_BACKEND_URL=<public-url> pytest backend/tests/backend_test.py --junitxml=/app/test_reports/pytest/pytest_results.xml. Frontend uses Angular Material; data-testids are present on all critical elements. NOTE: register-role is a mat-radio-group (not a select); default value is 'User' (ROLE_USER) - to pick admin click the 'Admin' radio. The user-menu logout option does not have a data-testid; click element with text 'Sign out' after clicking [data-testid='nav-user-menu']. Leaderboard podium-card data-testid exists on /leaderboard only.",
+  "rca of the issue": "Login-failure snackbar text: The ErrorInterceptor likely contains a branch like `if (err.status === 401) snack.open('Session expired - please log in again')` without checking the request URL or err.error.detail.code. Both the auth/login 401 (INVALID_CREDENTIALS) and a protected-route 401 (UNAUTHENTICATED) thus map to the same toast. Fix: special-case `/auth/login` 401 to read err.error.detail.message (server already returns 'Invalid email or password' with code INVALID_CREDENTIALS) and skip the auto-logout/redirect for that case. Also ensure the interceptor pipes one error once - double-toast suggests the error stream is being subscribed twice (possibly because both ErrorInterceptor and login component show the snack on subscribe error)."
+}
