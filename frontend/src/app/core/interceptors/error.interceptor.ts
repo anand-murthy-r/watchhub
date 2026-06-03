@@ -12,12 +12,15 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
     catchError((err: HttpErrorResponse) => {
       const payload = err.error?.detail || err.error || {};
       const message = payload.message || err.message || 'Unexpected error';
+      const isAuthRoute = req.url.includes('/auth/login') || req.url.includes('/auth/register');
 
       if (err.status === 401) {
-        toast.error('Session expired - please log in again');
-        sessionStorage.removeItem('wh.session.token');
-        sessionStorage.removeItem('wh.session.user');
-        if (!req.url.endsWith('/auth/login') && !req.url.endsWith('/auth/register')) {
+        if (isAuthRoute) {
+          toast.error(message || 'Invalid email or password');
+        } else {
+          toast.error('Session expired - please log in again');
+          sessionStorage.removeItem('wh.session.token');
+          sessionStorage.removeItem('wh.session.user');
           router.navigate(['/login']);
         }
       } else if (err.status === 403) {
